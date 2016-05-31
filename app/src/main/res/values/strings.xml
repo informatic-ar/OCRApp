@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">OCRApp</string>
+    <string name="action_settings">Settings</string>
+    <string name="waitmsg">جاري إستخراج النص من الصورة</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="loading">جاري تحضير الملفات المطلوبة</string>
+    <string name="choose">إختر صورة</string>
+    <string name="error_ocr">غير قادر على قراءة النص</string>
+    <string name="success_ocr">تم إستخراج النص</string>
+    <string name="processing">جاري المعالجة</string>
+</resources>

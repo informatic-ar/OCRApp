@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.mamawco.apps.ocrapp"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+    compile 'com.rmtheis:tess-two:5.4.0'
+    compile 'com.android.support:support-v4:23.3.0'
+}
+android.applicationVariants.all { variant ->
+    def applicationId = variant.applicationId
+    def adb = android.adbExe as String
+    def variantName = variant.name.capitalize()
+
+    def grantPermissionsTask = tasks.create("grant${variantName}permissions") << {
+        "${adb} devices".execute().text.eachLine {
+            if (it.endsWith("device")) {
+                def device = it.split()[0]
+                "${adb} -s ${device} shell pm grant ${applicationId} android.permission.READ_EXTERNAL_STORAGE".execute()
+                "${adb} -s ${device} shell pm grant ${applicationId} android.permission.WRITE_EXTERNAL_STORAGE".execute()
+            }
+        }
+    }
+    grantPermissionsTask.description = "Grant Storage permission on android 6 and later devices"
+    grantPermissionsTask.group = "extras"
+
+}
