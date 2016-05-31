@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class SplashActivity extends AppCompatActivity {
     //Change this path to where you place the tessdata folder in your device
     //will later remove it and bundle all of our data within the app
-    private final String TESSDATA_PATH = "/storage/762C-06FD/Download" ;
+    private final String TESSDATA_PATH = "/storage/emulated/0/Download" ;
     private final String LANGUAGE = "ara";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
